@@ -1,0 +1,36 @@
+version: "3.8"
+services:
+  app:
+    build: ./infra/php
+    volumes:
+      - ./src:/work
+  web:
+    image: nginx:1.18-alpine
+    ports:
+      - 10080:80
+    volumes:
+      - ./src:/work
+      - ./infra/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    working_dir: /work
+  mysql:
+    build: ./infra/mysql
+    volumes:
+      - mysql-store:/var/lib/mysql
+  redis:
+    image: redis:latest
+    ports:
+      - 60379:6379
+    volumes:
+      - redis-store:/data
+  dynamodb:
+    image: amazon/dynamodb-local
+    command: -jar DynamoDBLocal.jar -dbPath /home/dynamodblocal/data
+    volumes:
+      - dynamodb-store:/home/dynamodblocal/data
+    ports:
+      - 50706:8000
+
+volumes:
+  mysql-store:
+  redis-store:
+  dynamodb-store:
