@@ -11,8 +11,11 @@ RUN apt-get update && \
     git clone https://github.com/phpredis/phpredis.git /usr/src/php/ext/redis && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
-    docker-php-ext-install intl pdo_mysql zip bcmath redis
+    pecl install xdebug && \
+    docker-php-ext-install intl pdo_mysql zip bcmath redis xdebug && \
+    docker-php-ext-enable xdebug
 
 COPY ./php.ini /usr/local/etc/php/php.ini
+COPY ./xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 
 WORKDIR /work
