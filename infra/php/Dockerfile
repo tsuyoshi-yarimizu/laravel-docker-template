@@ -12,7 +12,7 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     pecl install xdebug && \
-    docker-php-ext-install intl pdo_mysql zip bcmath redis xdebug && \
+    docker-php-ext-install intl pdo_mysql zip bcmath redis && \
     docker-php-ext-enable xdebug
 
 COPY ./php.ini /usr/local/etc/php/php.ini
