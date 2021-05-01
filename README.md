@@ -53,29 +53,3 @@ DB_USERNAME=root // infra/mysql/Dockerfile ARG DB_USER
 DB_PASSWORD=secret // infra/mysql/Dockerfile ARG MYSQL_PASSWORD
 ```
 
-### Redis
-
-Change redis client conf.  
- config/database.php
-
-```php
-
-<?php
-
-use Illuminate\Support\Str;
-
-return [
-    ...,
-    'redis' => [
-        'client' => env('REDIS_CLIENT', 'predis'),
-        ...,
-    ],
-```
-
-.env
-
-```
-REDIS_HOST=redis
-REDIS_PASSWORD=null
-REDIS_PORT=6379
-```
