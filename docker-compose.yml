@@ -24,15 +24,7 @@ services:
       - 60379:6379
     volumes:
       - redis-store:/data
-  dynamodb:
-    image: amazon/dynamodb-local
-    command: -jar DynamoDBLocal.jar -dbPath /home/dynamodblocal/data
-    volumes:
-      - dynamodb-store:/home/dynamodblocal/data
-    ports:
-      - 50706:8000
 
 volumes:
   mysql-store:
   redis-store:
-  dynamodb-store:
